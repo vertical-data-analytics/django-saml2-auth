@@ -108,6 +108,7 @@ def _get_saml_client(domain):
                 'logout_requests_signed': True,
                 'want_assertions_signed': True,
                 'want_response_signed': False,
+                'accepted_time_diff': 60,  # provide 60 seconds of slack,
             },
         },
     }
@@ -237,7 +238,7 @@ def signin(r):
 
     # Only permit signin requests where the next_url is a safe URL
     if parse_version(get_version()) >= parse_version('2.0'):
-        url_ok = is_safe_url(next_url, None)
+        url_ok = is_safe_url(next_url, settings.ALLOWED_HOSTS)
     else:
         url_ok = is_safe_url(next_url)
 
