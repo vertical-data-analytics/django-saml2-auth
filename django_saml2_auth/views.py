@@ -209,6 +209,7 @@ def acs(r):
 
         frontend_url = settings.SAML2_AUTH.get(
             'FRONTEND_URL', next_url)
+        print(frontend_url)
 
         return HttpResponseRedirect(frontend_url+query)
 
@@ -245,6 +246,7 @@ def signin(r):
     if not url_ok:
         return HttpResponseRedirect(get_reverse([denied, 'denied', 'django_saml2_auth:denied']))
 
+    print("Next url: {}".format(next_url))
     r.session['login_next_url'] = next_url
 
     saml_client = _get_saml_client(get_current_domain(r))
