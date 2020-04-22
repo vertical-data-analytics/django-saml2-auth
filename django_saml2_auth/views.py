@@ -209,11 +209,11 @@ def acs(r):
         jwt_token = jwt_encode(target_user)
         query = '?uid={}&token={}'.format(target_user.id, jwt_token)
 
-        frontend_url = next_url or settings.SAML2_AUTH.get(
-            'FRONTEND_URL', next_url)
-        print(frontend_url)
+        # frontend_url = next_url or settings.SAML2_AUTH.get(
+        #     'FRONTEND_URL', next_url)
+        # print(frontend_url)
 
-        return HttpResponseRedirect(frontend_url+query)
+        return HttpResponseRedirect(next_url+query)
 
     if is_new_user:
         try:
